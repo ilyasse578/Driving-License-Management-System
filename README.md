@@ -56,7 +56,14 @@ This system allows the issuance, renewal, and management of driving licenses. It
 4. Build the project and run.
 
 ## Screenshots 📷
-*(Add screenshots here to show main forms and UI.)*
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/2b4f4b19-14ba-4e3d-9bdb-ffd3e5ec003b" />
+<img width="1212" height="485" alt="image" src="https://github.com/user-attachments/assets/0934c5d9-a509-4377-b078-30f389d4915f" />
+<img width="776" height="379" alt="image" src="https://github.com/user-attachments/assets/cfcbdaad-a710-47d3-a8d4-e2d4c7fd1352" />
+<img width="879" height="476" alt="image" src="https://github.com/user-attachments/assets/7e3425a9-ca61-469c-806d-a9cc7747db12" />
+
+
+
+
 
 ## Notes 📝
 - Each applicant can hold multiple licenses from different classes.
