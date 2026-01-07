@@ -43,6 +43,7 @@
             // 
             // gbFilterBy
             // 
+            this.gbFilterBy.BackColor = System.Drawing.Color.White;
             this.gbFilterBy.Controls.Add(this.btnAddNewPerson);
             this.gbFilterBy.Controls.Add(this.btnSearch);
             this.gbFilterBy.Controls.Add(this.txbFindBy);
@@ -90,6 +91,7 @@
             this.txbFindBy.Size = new System.Drawing.Size(173, 26);
             this.txbFindBy.TabIndex = 7;
             this.txbFindBy.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbFindBy_KeyPress);
+            this.txbFindBy.Validating += new System.ComponentModel.CancelEventHandler(this.txbFindBy_Validating_1);
             // 
             // cbFindBy
             // 
@@ -103,6 +105,7 @@
             this.cbFindBy.Name = "cbFindBy";
             this.cbFindBy.Size = new System.Drawing.Size(173, 24);
             this.cbFindBy.TabIndex = 6;
+            this.cbFindBy.SelectedIndexChanged += new System.EventHandler(this.cbFindBy_SelectedIndexChanged_1);
             // 
             // label1
             // 
@@ -130,10 +133,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ctrlPersonCard1);
             this.Controls.Add(this.gbFilterBy);
             this.Name = "ctrlPersonCardWithFilter";
             this.Size = new System.Drawing.Size(750, 345);
+            this.Load += new System.EventHandler(this.ctrlPersonCardWithFilter_Load);
             this.gbFilterBy.ResumeLayout(false);
             this.gbFilterBy.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

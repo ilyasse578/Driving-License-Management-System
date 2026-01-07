@@ -120,28 +120,29 @@ namespace DVLD_Version_3
 
         private void deleteToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
-            // Delete Person
             int PersonID = Convert.ToInt32(dgvShowPeople.CurrentRow.Cells[0].Value);
 
-           clsPerson person = clsPerson.Find(PersonID);
 
-            if (person != null)
+            // Delete Person
+            if (MessageBox.Show("Are you sure want to delete this person", "Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                if (person.Delete(PersonID))
+                if (clsPerson.Delete(PersonID))
+                {
                     MessageBox.Show("Person deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _RefreshPeoplList();
+                }
                 else
-                    MessageBox.Show("Person was not deleted due to linked Data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                    MessageBox.Show("Can not delete this person due to linked data", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
-            _RefreshPeoplList();
+            
         }
 
         private void showPersonInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int PersonID = Convert.ToInt32(dgvShowPeople.CurrentRow.Cells[0].Value);
 
-            frmPersonDetails frm = new frmPersonDetails(PersonID);
+            frmShowPersonInfo frm = new frmShowPersonInfo(PersonID);
             frm.ShowDialog();
 
             _RefreshPeoplList();

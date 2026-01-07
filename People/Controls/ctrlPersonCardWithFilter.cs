@@ -98,12 +98,7 @@ namespace DVLD_Version_3.People.Controls
                 OnPersonSelected(ctrlPersonCard1.PersonID);
         }
 
-        private void cbFindBy_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txbFindBy.Text = "";
-            txbFindBy.Focus();
-        }
-
+       
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if (!this.ValidateChildren())
@@ -117,12 +112,6 @@ namespace DVLD_Version_3.People.Controls
             FindNow();
         }
 
-        private void ctrlPersonCardWithFilter_Load(object sender, EventArgs e)
-        {
-            cbFindBy.SelectedIndex = 1;
-            txbFindBy.Focus();
-
-        }
 
        
 
@@ -150,7 +139,19 @@ namespace DVLD_Version_3.People.Controls
 
       
 
-        private void txbFindBy_Validating(object sender, CancelEventArgs e)
+        private void ctrlPersonCardWithFilter_Load(object sender, EventArgs e)
+        {
+            cbFindBy.SelectedIndex = 1;
+            txbFindBy.Focus();
+        }
+
+        private void cbFindBy_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            txbFindBy.Text = "";
+            txbFindBy.Focus();
+        }
+
+        private void txbFindBy_Validating_1(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(txbFindBy.Text.Trim()))
             {
@@ -162,6 +163,7 @@ namespace DVLD_Version_3.People.Controls
                 //e.Cancel = false;
                 errorProvider1.SetError(txbFindBy, null);
             }
+
         }
 
         private void txbFindBy_KeyPress(object sender, KeyPressEventArgs e)
@@ -176,9 +178,6 @@ namespace DVLD_Version_3.People.Controls
             //this will allow only digits if person id is selected
             if (cbFindBy.Text == "Person ID")
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-
         }
-
-       
     }
 }

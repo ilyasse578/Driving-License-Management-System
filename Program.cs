@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD_Version_3.Global_Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,20 @@ namespace DVLD_Version_3
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+
+            while (true)
+            {
+                using (frmLogin login = new frmLogin())
+                {
+                    if (login.ShowDialog() != DialogResult.OK)
+                        break;
+                }
+
+                Application.Run(new frmMain(null));
+
+                clsGlobal.CurrentUser = null; // logout
+            }
         }
+
     }
 }

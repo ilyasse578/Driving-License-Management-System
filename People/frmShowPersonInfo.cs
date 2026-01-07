@@ -10,21 +10,23 @@ using System.Windows.Forms;
 
 namespace DVLD_Version_3.People
 {
-    public partial class frmPersonDetails : Form
+    public partial class frmShowPersonInfo : Form
     {
-        int _PersonID = -1;
-        public frmPersonDetails(int personID)
+        
+        public frmShowPersonInfo(int PersonID)
         {
             InitializeComponent();
-            _PersonID = personID;
+            ctrlPersonCard1.LoadPersonInfo(PersonID);
         }
 
-        private void frmPersonDetails_Load(object sender, EventArgs e)
+     
+        public frmShowPersonInfo(string  NationalNo)
         {
-            ctrlPersonCard1.LoadPersonInfo(_PersonID);
-
+            InitializeComponent();
+            ctrlPersonCard1.LoadPersonInfo(NationalNo);
         }
 
+     
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
