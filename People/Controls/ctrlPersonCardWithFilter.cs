@@ -70,7 +70,7 @@ namespace DVLD_Version_3.People.Controls
         public void LoadPersonInfo(int PersonID)
         {
 
-            cbFindBy.SelectedIndex = 1;
+            cbFindBy.SelectedIndex = 0;
             txbFindBy.Text = PersonID.ToString();
             FindNow();
 
@@ -112,9 +112,6 @@ namespace DVLD_Version_3.People.Controls
             FindNow();
         }
 
-
-       
-
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
             frmAddUpdatePerson frm1 = new frmAddUpdatePerson();
@@ -127,7 +124,7 @@ namespace DVLD_Version_3.People.Controls
         {
             // Handle the data received
 
-            cbFindBy.SelectedIndex = 1;
+            cbFindBy.SelectedIndex = 0;
             txbFindBy.Text = PersonID.ToString();
             ctrlPersonCard1.LoadPersonInfo(PersonID);
         }
@@ -141,7 +138,7 @@ namespace DVLD_Version_3.People.Controls
 
         private void ctrlPersonCardWithFilter_Load(object sender, EventArgs e)
         {
-            cbFindBy.SelectedIndex = 1;
+            cbFindBy.SelectedIndex = 0;
             txbFindBy.Focus();
         }
 

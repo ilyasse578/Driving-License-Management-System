@@ -63,7 +63,7 @@ namespace DVLD_Version_3.Users
                 MessageBox.Show("An Error Occured, Password did not change.",
                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+            this.Close();
         }
 
         private void txtCurrentPassword_Validating_1(object sender, CancelEventArgs e)
