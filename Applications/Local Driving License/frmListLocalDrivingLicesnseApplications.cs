@@ -1,4 +1,5 @@
-﻿using DVLD_Version_3_Business;
+﻿using DVLD_Version_3.Tests;
+using DVLD_Version_3_Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,87 +54,87 @@ namespace DVLD_Version_3.Applications.Local_Driving_License
         }
 
 
-        //private void vistionTestToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
+        private void vistionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
-        //    int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
 
-        //    clsTestAppointment Appointment =
-        //        clsTestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, clsTestType.enTestType.VisionTest);
+            clsTestAppointment Appointment =
+                clsTestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, clsTestType.enTestType.VisionTest);
 
-        //    if (Appointment == null)
-        //    {
-        //        MessageBox.Show("No Vision Test Appointment Found!", "Set Appointment", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
-        //    }
-
-
-        //    frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, clsTestType.enTestType.VisionTest);
-        //    frm.ShowDialog();
+            if (Appointment == null)
+            {
+                MessageBox.Show("No Vision Test Appointment Found!", "Set Appointment", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
 
-        //}
-
-        //private void writtenTestToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
+            frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, clsTestType.enTestType.VisionTest);
+            frm.ShowDialog();
 
 
-        //    if (!clsLocalDrivingLicenseApplication.DoesPassTestType(LocalDrivingLicenseApplicationID, clsTestType.enTestType.VisionTest))
-        //    {
-        //        MessageBox.Show("Person Should Pass the Vision Test First!", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
-        //    }
+        }
 
-        //    clsTestAppointment Appointment =
-        //       clsTestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, clsTestType.enTestType.WrittenTest);
+        private void writtenTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
 
 
-        //    if (Appointment == null)
-        //    {
-        //        MessageBox.Show("No Written Test Appointment Found!", "Set Appointment", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
-        //    }
+            if (!clsLocalDrivingLicenseApplication.DoesPassTestType(LocalDrivingLicenseApplicationID, clsTestType.enTestType.VisionTest))
+            {
+                MessageBox.Show("Person Should Pass the Vision Test First!", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            clsTestAppointment Appointment =
+               clsTestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, clsTestType.enTestType.WrittenTest);
 
 
-        //    frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, clsTestType.enTestType.WrittenTest);
-        //    frm.ShowDialog();
-
-        //}
-
-        //private void streetTestToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
-
-        //    if (!clsLocalDrivingLicenseApplication.DoesPassTestType(LocalDrivingLicenseApplicationID, clsTestType.enTestType.WrittenTest))
-        //    {
-        //        MessageBox.Show("Person Should Pass the Written Test First!", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
-        //    }
-
-        //    clsTestAppointment Appointment =
-        //     clsTestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, clsTestType.enTestType.StreetTest);
+            if (Appointment == null)
+            {
+                MessageBox.Show("No Written Test Appointment Found!", "Set Appointment", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
 
-        //    if (Appointment == null)
-        //    {
-        //        MessageBox.Show("No Street Test Appointment Found!", "Set Appointment", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
-        //    }
+            frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, clsTestType.enTestType.WrittenTest);
+            frm.ShowDialog();
+
+        }
+
+        private void streetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
+
+            if (!clsLocalDrivingLicenseApplication.DoesPassTestType(LocalDrivingLicenseApplicationID, clsTestType.enTestType.WrittenTest))
+            {
+                MessageBox.Show("Person Should Pass the Written Test First!", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            clsTestAppointment Appointment =
+             clsTestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, clsTestType.enTestType.StreetTest);
 
 
-        //    frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, clsTestType.enTestType.StreetTest);
-        //    frm.ShowDialog();
+            if (Appointment == null)
+            {
+                MessageBox.Show("No Street Test Appointment Found!", "Set Appointment", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
 
-        //}
+            frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, clsTestType.enTestType.StreetTest);
+            frm.ShowDialog();
+
+
+        }
 
         private void _ScheduleTest(clsTestType.enTestType TestType)
         {
 
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
-            //frmListTestAppointments frm = new frmListTestAppointments(LocalDrivingLicenseApplicationID, TestType);
-            //frm.ShowDialog();
+            frmListTestAppointments frm = new frmListTestAppointments(LocalDrivingLicenseApplicationID, TestType);
+            frm.ShowDialog();
             //refresh
             frmListLocalDrivingLicesnseApplications_Load(null, null);
 
@@ -350,8 +351,7 @@ namespace DVLD_Version_3.Applications.Local_Driving_License
 
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //_ScheduleTest(clsTestType.enTestType.VisionTest);
-            MessageBox.Show("Not Ready Yet");
+            _ScheduleTest(clsTestType.enTestType.VisionTest);
 
         }
 
@@ -403,21 +403,14 @@ namespace DVLD_Version_3.Applications.Local_Driving_License
 
         private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not Ready Yet");
-
-            // _ScheduleTest(clsTestType.enTestType.WrittenTest);
+            _ScheduleTest(clsTestType.enTestType.WrittenTest);
         }
 
         private void scheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not Ready Yet");
-
-            // _ScheduleTest(clsTestType.enTestType.StreetTest);
+           _ScheduleTest(clsTestType.enTestType.StreetTest);
 
         }
-
-
-
 
 
     }
