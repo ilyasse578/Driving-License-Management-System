@@ -1,4 +1,5 @@
-﻿using DVLD_Version_3.Tests;
+﻿using DVLD_Version_3.Licenses.Local_Licenses;
+using DVLD_Version_3.Tests;
 using DVLD_Version_3_Business;
 using System;
 using System.Collections.Generic;
@@ -357,34 +358,34 @@ namespace DVLD_Version_3.Applications.Local_Driving_License
 
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show("Not Ready Yet");
-            //int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
-            //frmIssueDriverLicenseFirstTime frm = new frmIssueDriverLicenseFirstTime(LocalDrivingLicenseApplicationID);
-            //frm.ShowDialog();
-            //refresh
-            //frmListLocalDrivingLicesnseApplications_Load(null, null);
+
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
+            frmIssueDriverLicenseFirstTime frm = new frmIssueDriverLicenseFirstTime(LocalDrivingLicenseApplicationID);
+            frm.ShowDialog();
+           // refresh
+            frmListLocalDrivingLicesnseApplications_Load(null, null);
 
         }
 
         private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not Ready Yet");
-            //int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
+            //MessageBox.Show("Not Ready Yet");
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
 
-            //int LicenseID = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(
-            //   LocalDrivingLicenseApplicationID).GetActiveLicenseID();
+            int LicenseID = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(
+               LocalDrivingLicenseApplicationID).GetActiveLicenseID();
 
-            //if (LicenseID != -1)
-            //{
-            //    frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
-            //    frm.ShowDialog();
+            if (LicenseID != -1)
+            {
+                frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
+                frm.ShowDialog();
 
-            //}
-            //else
-            //{
-            //    MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
+            }
+            else
+            {
+                MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
 
         }
@@ -392,13 +393,13 @@ namespace DVLD_Version_3.Applications.Local_Driving_License
         private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            MessageBox.Show("Not Ready Yet");
+           
 
-            //int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
-            //clsLocalDrivingLicenseApplication localDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
+            clsLocalDrivingLicenseApplication localDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
 
-            //frmShowPersonLicenseHistory frm = new frmShowPersonLicenseHistory(localDrivingLicenseApplication.ApplicantPersonID);
-            //frm.ShowDialog();
+           Licenses.frmShowPersonLicenseHistory frm = new Licenses.frmShowPersonLicenseHistory(localDrivingLicenseApplication.ApplicantPersonID);
+            frm.ShowDialog();
         }
 
         private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
