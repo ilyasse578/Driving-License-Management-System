@@ -816,14 +816,13 @@
     <None Include="Icons\Written Test 512.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DVLD Version 3 Business\DVLD Version 3 Business.csproj">
+    <Content Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="DVLD Version 3 Business\DVLD Version 3 Business.csproj">
       <Project>{9dd8d921-7170-49dd-8e01-d117ea7607f5}</Project>
       <Name>DVLD Version 3 Business</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include=".gitignore" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

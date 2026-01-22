@@ -144,5 +144,11 @@ namespace DVLD_Version_3
             frmListInternationalLicesnseApplications frm = new frmListInternationalLicesnseApplications();
             frm.ShowDialog();
         }
+
+        private void releaseDetainedDrivingLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLicenseApplication frm = new frmReleaseDetainedLicenseApplication();
+            frm.ShowDialog();
+        }
     }
 }
