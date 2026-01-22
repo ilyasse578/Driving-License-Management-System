@@ -1,6 +1,5 @@
 ﻿using DVLD_Version_3.Global_Classes;
 using DVLD_Version_3.Licenses.Local_Licenses;
-using DVLD_Version_3.Licenses.Local_Licenses.Controls;
 using DVLD_Version_3_Business;
 using System;
 using System.Collections.Generic;
@@ -48,30 +47,17 @@ namespace DVLD_Version_3.Applications.ReplaceLostOrDamagedLicense
                 return enIssueReason.LostReplacement;
         }
 
-    
-  
-       private void llShowLicenseInfo_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
-       {
 
-            frmShowLicenseInfo frm =
-                 new frmShowLicenseInfo(_NewLicenseID);
-            frm.ShowDialog();
-       }
-
-        private void btnClose_Click_1(object sender, EventArgs e)
+       
+     
+        private void frmReplaceLostOrDamagedLicenseApplication_Activated(object sender, EventArgs e)
         {
-            this.Close();
+            if(ctrlDriverLicenseInfoWithFilter1 != null)
+            ctrlDriverLicenseInfoWithFilter1.txtLicenseIDFocus();
         }
 
-        private void llShowLicenseHistory_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
-        {
 
-           // frmShowPersonLicenseHistory frm =
-           //new frmShowPersonLicenseHistory(ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID);
-           // frm.ShowDialog();
-        }
-
-        private void btnIssueReplacement_Click(object sender, EventArgs e)
+        private void btnIssueReplacement_Click_1(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to Issue a Replacement for the license?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
@@ -100,6 +86,45 @@ namespace DVLD_Version_3.Applications.ReplaceLostOrDamagedLicense
             gbReplacementFor.Enabled = false;
             ctrlDriverLicenseInfoWithFilter1.FilterEnabled = false;
             llShowLicenseInfo.Enabled = true;
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void llShowLicenseInfo_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmShowLicenseInfo frm =
+                new frmShowLicenseInfo(_NewLicenseID);
+            frm.ShowDialog();
+
+        }
+
+        private void llShowLicenseHistory_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            Licenses.frmShowPersonLicenseHistory frm =
+            new Licenses.frmShowPersonLicenseHistory(ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID);
+            frm.ShowDialog();
+        }
+
+        private void rbDamagedLicense_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+            lblTitle.Text = "Replacement for Damaged License";
+            this.Text = lblTitle.Text;
+            lblApplicationFees.Text = clsApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
+
+        }
+
+        private void rbLostLicense_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+            lblTitle.Text = "Replacement for Lost License";
+            this.Text = lblTitle.Text;
+            lblApplicationFees.Text = clsApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
         }
 
         private void frmReplaceLostOrDamagedLicenseApplication_Load(object sender, EventArgs e)
@@ -108,30 +133,10 @@ namespace DVLD_Version_3.Applications.ReplaceLostOrDamagedLicense
             lblCreatedByUser.Text = clsGlobal.CurrentUser.UserName;
 
             rbDamagedLicense.Checked = true;
-        }
-
-        private void rbDamagedLicense_CheckedChanged_1(object sender, EventArgs e)
-        {
-            lblTitle.Text = "Replacement for Damaged License";
-            this.Text = lblTitle.Text;
-            lblApplicationFees.Text = clsApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
 
         }
 
-        private void ctrlDriverLicenseInfoWithFilter1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rbLostLicense_CheckedChanged_1(object sender, EventArgs e)
-        {
-            lblTitle.Text = "Replacement for Lost License";
-            this.Text = lblTitle.Text;
-            lblApplicationFees.Text = clsApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
-
-        }
-
-        private void ctrlDriverLicenseInfoWithFilter1_OnLicenseSelected_1(int obj)
+        private void ctrlDriverLicenseInfoWithFilter1_OnLicenseSelected(int obj)
         {
             int SelectedLicenseID = obj;
             lblOldLicenseID.Text = SelectedLicenseID.ToString();
@@ -152,12 +157,7 @@ namespace DVLD_Version_3.Applications.ReplaceLostOrDamagedLicense
             }
 
             btnIssueReplacement.Enabled = true;
-        }
-
-        private void frmReplaceLostOrDamagedLicenseApplication_Activated(object sender, EventArgs e)
-        {
-            ctrlDriverLicenseInfoWithFilter1.txtLicenseIDFocus();
-
+            btnIssueReplacement.Enabled = true;
         }
     }
 
