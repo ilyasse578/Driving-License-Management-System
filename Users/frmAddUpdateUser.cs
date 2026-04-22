@@ -223,7 +223,10 @@ namespace DVLD_Version_3.Users
 
             _User.PersonID = ctrlPersonCardWithFilter1.PersonID;
             _User.UserName = txtUserName.Text.Trim();
-            _User.Password = txtPassword.Text.Trim();
+            ///summary
+            /// pasword hashed
+            /// summary
+            _User.Password = clsHash.ComputeHash(txtPassword.Text.Trim());
             _User.IsActive = chkIsActive.Checked;
 
 

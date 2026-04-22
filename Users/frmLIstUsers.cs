@@ -32,6 +32,7 @@ namespace DVLD_Version_3.Users
         {
             frmAddUpdateUser frm = new frmAddUpdateUser();
             frm.ShowDialog();
+            frmListUsers_Load(null, null);
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
@@ -182,6 +183,7 @@ namespace DVLD_Version_3.Users
         {
             frmAddUpdateUser frm = new frmAddUpdateUser();
             frm.ShowDialog();
+            frmListUsers_Load(null,null);
         }
 
         private void editPersonInfoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -190,6 +192,7 @@ namespace DVLD_Version_3.Users
 
             frmAddUpdateUser frm = new frmAddUpdateUser(UserID);
             frm.ShowDialog();
+            frmListUsers_Load(null, null);
         }
 
         private void deleteToolStripMenuItem1_Click(object sender, EventArgs e)

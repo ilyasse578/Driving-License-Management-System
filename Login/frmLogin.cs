@@ -1,9 +1,13 @@
-﻿using DVLD_Version_3.Global_Classes;
+﻿using DVLD.Classes;
+using DVLD_Version_3.Global_Classes;
 using DVLD_Version_3_Business;
+using DVLD_Version_3_DataAccess;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,50 +30,50 @@ namespace DVLD_Version_3
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            clsUser User = clsUser.FindByUsernameAndPassword(txtUserName.Text.Trim(), txtPassword.Text.Trim());
+             string hashedPassword = clsHash.ComputeHash(txtPassword.Text.Trim());
+             //clsUser user = clsUser.FindByUsernameAndPassword(txtUserName.Text.Trim(), txtPassword.Text.Trim());
+            clsUser user = clsUser.FindByUsernameAndPassword(txtUserName.Text.Trim(), hashedPassword);
 
-
-            if (User != null)
+            if (user != null)
             {
+
                 if (chkRememberMe.Checked)
                 {
-                    //store the username and password
-                    clsGlobal.RememberUsernameAndPassword(txtUserName.Text.Trim(), txtPassword.Text.Trim());
+                    //store username and password
+                    clsGlobal.RememberUserNameAndPasswordInRegistry(txtUserName.Text.Trim(), txtPassword.Text.Trim());
 
                 }
-
                 else
                 {
                     //store empty username and password
-                    clsGlobal.RememberUsernameAndPassword("", "");
+                    clsGlobal.RememberUserNameAndPasswordInRegistry("", "");
 
                 }
 
-                //in case the use is not active
-                if(!User.IsActive)
+                //incase the user is not active
+                if (!user.IsActive)
                 {
+
                     txtUserName.Focus();
-
-                    MessageBox.Show("Your account is not active contact your admin", "In Active Account", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Your accound is not Active, Contact Admin.", "In Active Account", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
-
                 }
-                clsGlobal.CurrentUser = User;
+
+                clsGlobal.CurrentUser = user;
                 this.Hide();
                 frmMain frm = new frmMain(this);
                 frm.ShowDialog();
 
 
-
             }
-
-
-            else 
+            else
             {
-                MessageBox.Show("UserName or password incorrect !!!", "Error credentials", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtUserName.Text = "";
-                txtPassword.Text = "";
                 txtUserName.Focus();
+                txtUserName.Clear();
+                txtPassword.Clear();
+                
+                
+                MessageBox.Show("Invalid Username/Password.", "Wrong Credintials", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -78,7 +82,7 @@ namespace DVLD_Version_3
         private void frmLogin_Load(object sender, EventArgs e)
         {
             string Username = "", Password = "";
-            if (clsGlobal.GetStoredCredential(ref Username, ref Password))
+            if (clsGlobal.GetSortedCredentialFromRegistry(ref Username, ref Password))
             {
                 txtUserName.Text = Username;
                 txtPassword.Text = Password;

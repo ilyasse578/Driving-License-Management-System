@@ -50,7 +50,7 @@ namespace DVLD_Version_3.Users
                 return;
             }
 
-            _User.Password = txtNewPassword.Text;
+            _User.Password =clsHash.ComputeHash(txtNewPassword.Text);
 
             if (_User.Save())
             {
