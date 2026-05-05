@@ -188,80 +188,54 @@ namespace DVLD_Version_3_DataAccess
 
 
 
-        public static  int AddNewPerson(string FirstName, string SecondName, string ThirdName,
-                     string LastName,  string NationalNo, DateTime DateOfBirth, short Gender, string Address,
-                     string Phone, string Email, int NationalityCountryID, string ImagePath)
+        public static int AddNewPerson(string FirstName, string SecondName, string ThirdName,
+       string LastName, string NationalNo, DateTime DateOfBirth, short Gender, string Address,
+       string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             int PersonID = -1;
 
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @"INSERT INTO People (NationalNo,FirstName, SecondName, ThirdName, LastName, DateOfBirth 
-                                                    ,Gender,Address,Phone,Email ,NationalityCountryID ,ImagePath)
-                            VALUES
-                                                (@NationalNo,@FirstName, @SecondName, @ThirdName, @LastName, @DateOfBirth 
-                                                 ,@Gender,@Address,@Phone,@Email ,@NationalityCountryID ,@ImagePath);
-                            SELECT SCOPE_IDENTITY(); ";
-
-
-
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@NationalNo", NationalNo);
-            command.Parameters.AddWithValue("@FirstName", FirstName);
-            command.Parameters.AddWithValue("@SecondName", SecondName);
-
-            if(ThirdName != "" && ThirdName != null)
-            command.Parameters.AddWithValue("@ThirdName", ThirdName);
-            else
-                command.Parameters.AddWithValue("@ThirdName", System.DBNull.Value);
-
-            command.Parameters.AddWithValue("@LastName", LastName);
-            command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
-            command.Parameters.AddWithValue("@Gender", Gender);
-            command.Parameters.AddWithValue("@Address", Address);
-            command.Parameters.AddWithValue("@Phone", Phone);
-
-            if (Email != "" && Email != null)
-                command.Parameters.AddWithValue("@Email", Email);
-            else
-                command.Parameters.AddWithValue("@Email", System.DBNull.Value);
-
-            command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
-
-            if (ImagePath != "" && ImagePath != null)
-                command.Parameters.AddWithValue("@ImagePath", ImagePath);
-            else
-                command.Parameters.AddWithValue("@ImagePath", System.DBNull.Value);
-
-            try
+            using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                connection.Open();
-
-                object Result = command.ExecuteScalar();
-
-                if (Result != null && int.TryParse(Result.ToString(), out int InsertedID))
+                using (SqlCommand command = new SqlCommand("SP_AddNewPerson", connection))
                 {
-                    PersonID = InsertedID;
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@NationalNo", NationalNo);
+                    command.Parameters.AddWithValue("@FirstName", FirstName);
+                    command.Parameters.AddWithValue("@SecondName", SecondName);
+
+                    command.Parameters.AddWithValue("@ThirdName",
+                        string.IsNullOrEmpty(ThirdName) ? (object)DBNull.Value : ThirdName);
+
+                    command.Parameters.AddWithValue("@LastName", LastName);
+                    command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+                    command.Parameters.AddWithValue("@Gender", Gender);
+                    command.Parameters.AddWithValue("@Address", Address);
+                    command.Parameters.AddWithValue("@Phone", Phone);
+
+                    command.Parameters.AddWithValue("@Email",
+                        string.IsNullOrEmpty(Email) ? (object)DBNull.Value : Email);
+
+                    command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
+
+                    command.Parameters.AddWithValue("@ImagePath",
+                        string.IsNullOrEmpty(ImagePath) ? (object)DBNull.Value : ImagePath);
+
+                    SqlParameter outputIdParam = new SqlParameter("@NewPersonID", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    command.Parameters.Add(outputIdParam);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                    PersonID = (int)command.Parameters["@NewPersonID"].Value;
                 }
-
-            }
-
-            catch (Exception ex)
-            {
-                //log errors
-            }
-
-            finally
-            {
-                connection.Close();
             }
 
             return PersonID;
-
         }
-
 
 
         public static bool UpdatePerson(int PersonID, string FirstName, string SecondName, string ThirdName,
